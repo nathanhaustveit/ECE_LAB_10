@@ -27,8 +27,7 @@ module demultiplexer(
     output reg [8:0] A,
     output reg [8:0] B,
     output reg [8:0] C,
-    output reg [8:0] D,
-    output [3:0] turner
+    output reg [8:0] D
 );
 
     always @(*) begin 
