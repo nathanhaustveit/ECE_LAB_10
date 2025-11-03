@@ -28,6 +28,7 @@ module memory_system(
 );
 
 wire [7:0] inp[3:0];
+wire [7:0} enb[3:0];
 //Not Done
 //For the next time, have one demux and use it to connect enables to the storages. 
 
@@ -41,6 +42,15 @@ demultiplexer idk(
     .C(inp[2]),
     .D(inp[3])
     );
+
+    demultiplexer enabler(
+    .data(1),
+    .sel(addr),
+    .A(enb[0]),
+    .B(enb[1]),
+    .C(enb[2]),
+    .D(enb[3])
+    );
     
 wire [7:0] ans[3:0];
 
@@ -49,25 +59,25 @@ wire [7:0] ans[3:0];
 //When the new demux is made to manage enables
 byte_memory first(
     .E(store),
-    .D(inp[0]),
+    .D(enb[0]),
     .memory(ans[0])
     );
 
 byte_memory second(
     .E(store),
-    .D(inp[1]),
+    .D(enb[1]),
     .memory(ans[1])
     );
     
 byte_memory third(
     .E(store),
-    .D(inp[2]),
+    .D(enb[2]),
     .memory(ans[2])
     );
     
  byte_memory fourth(
     .E(store),
-    .D(inp[3]),
+     .D(enb[3]),
     .memory(ans[3])
     );
 
