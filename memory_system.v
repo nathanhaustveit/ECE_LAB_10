@@ -28,7 +28,7 @@ module memory_system(
 );
 
 wire [7:0] inp[3:0];
-wire [7:0} enb[3:0];
+wire [7:0] enb[3:0];
 //Not Done
 //For the next time, have one demux and use it to connect enables to the storages. 
 
@@ -58,33 +58,33 @@ wire [7:0] ans[3:0];
 //The different storages that are to be used. The .D on all of them have to be changed
 //When the new demux is made to manage enables
 byte_memory first(
-    .E(store),
-    .D(enb[0]),
+    .store(store),
+    .data(enb[0]),
     .memory(ans[0])
     );
 
 byte_memory second(
-    .E(store),
-    .D(enb[1]),
+    .store(store),
+    .data(enb[1]),
     .memory(ans[1])
     );
     
 byte_memory third(
-    .E(store),
-    .D(enb[2]),
+    .store(store),
+    .data(enb[2]),
     .memory(ans[2])
     );
     
  byte_memory fourth(
-    .E(store),
-     .D(enb[3]),
+    .store(store),
+    .data(enb[3]),
     .memory(ans[3])
     );
 
 //Done on the mux
 mux cool(
     .enable(store),
-    .sel(addr),
+    .Sel(addr),
     .A(ans[0]),
     .B(ans[1]),
     .C(ans[2]),

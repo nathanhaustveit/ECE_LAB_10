@@ -25,7 +25,7 @@ module top(
     input btnC,
     output [15:0] led
 );
-    DLatch part1(
+    d_latch part1(
         .D(sw[0]),
         .Q(led[0]),
         .NotQ(led[1]),
