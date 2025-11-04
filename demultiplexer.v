@@ -24,10 +24,10 @@
 module demultiplexer(
     input [7:0] data,
     input [1:0] sel,
-    output reg [8:0] A,
-    output reg [8:0] B,
-    output reg [8:0] C,
-    output reg [8:0] D
+    output reg [7:0] A,
+    output reg [7:0] B,
+    output reg [7:0] C,
+    output reg [7:0] D
 );
 
     always @(*) begin 
