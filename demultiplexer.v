@@ -19,7 +19,7 @@
 // 
 //////////////////////////////////////////////////////////////////////////////////
 
-//One demux for the input and which storage it goes to
+//One demux for the dataBundleut and which storage it goes to
 //Another to decided where the enables go.
 module demultiplexer(
     input [7:0] data,
@@ -33,7 +33,7 @@ module demultiplexer(
     always @(*) begin 
         case(sel)
             2'b00: {D, C, B, A} <= {8'b0, 8'b0, 8'b0, data}; 
-            2'b01: {D, C, B, A} <= {8'b0, 4'b0, data, 8'b0};
+            2'b01: {D, C, B, A} <= {8'b0, 8'b0, data, 8'b0};
             2'b10: {D, C, B, A} <= {8'b0, data, 8'b0, 8'b0};
             2'b11: {D, C, B, A} <= {data, 8'b0, 8'b0, 8'b0};
         endcase

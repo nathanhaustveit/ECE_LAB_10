@@ -27,68 +27,68 @@ module memory_system(
     output [7:0] memory
 );
 
-wire [7:0] inp[3:0];
-wire [7:0] enb[3:0];
+wire [7:0] dataBundle[3:0]; // data bundle 1
+wire [3:0] selectOut;
 //Not Done
 //For the next time, have one demux and use it to connect enables to the storages. 
 
-//This demux gets the input and shares it to the storages, currently sets the storages
+//This demux gets the dataBundleut and shares it to the storages, currently sets the storages
 //that arent selected to 0 due to enable issue 
-demultiplexer idk(
+demultiplexer dataDemux(
     .data(data),
     .sel(addr),
-    .A(inp[0]),
-    .B(inp[1]),
-    .C(inp[2]),
-    .D(inp[3])
+    .A(dataBundle[0]),
+    .B(dataBundle[1]),
+    .C(dataBundle[2]),
+    .D(dataBundle[3])
     );
 
     demultiplexer enabler(
-    .data(1),
+    .data(store),
     .sel(addr),
-    .A(enb[0]),
-    .B(enb[1]),
-    .C(enb[2]),
-    .D(enb[3])
+    .A(selectOut[0]),
+    .B(selectOut[1]),
+    .C(selectOut[2]),
+    .D(selectOut[3])
     );
     
-wire [7:0] ans[3:0];
+wire [7:0] memoryBundle[3:0];
 
 
 //The different storages that are to be used. The .D on all of them have to be changed
 //When the new demux is made to manage enables
 byte_memory first(
-    .store(store),
-    .data(enb[0]),
-    .memory(ans[0])
+    .store(selectOut[0]),
+    .data(dataBundle[0]),
+    .memory(memoryBundle[0])
     );
 
 byte_memory second(
-    .store(store),
-    .data(enb[1]),
-    .memory(ans[1])
+    .store(selectOut[1]),
+    .data(dataBundle[1]),
+    .memory(memoryBundle[1])
     );
     
 byte_memory third(
-    .store(store),
-    .data(enb[2]),
-    .memory(ans[2])
+    .store(selectOut[2]),
+    .data(dataBundle[2]),
+    .memory(memoryBundle[2])
     );
     
  byte_memory fourth(
-    .store(store),
-    .data(enb[3]),
-    .memory(ans[3])
+    .store(selectOut[3]),
+    .data(dataBundle[3]),
+    .memory(memoryBundle[3])
     );
 
 //Done on the mux
 mux cool(
-    .enable(store),
+    .enable(1),
     .Sel(addr),
-    .A(ans[0]),
-    .B(ans[1]),
-    .C(ans[2]),
-    .D(ans[3]),
+    .A(memoryBundle[0]),
+    .B(memoryBundle[1]),
+    .C(memoryBundle[2]),
+    .D(memoryBundle[3]),
     .Y(memory)
     );
     // This should instantiate 4 instances of

@@ -38,7 +38,7 @@ generate
 endgenerate        
 
     // Herein, implement D-Latch style memory
-    // that stores the input data into memory
+    // that stores the dataBundleut data into memory
     // when store is high
 
     // Memory should always output the value
